@@ -29,7 +29,7 @@ include "koneksi.php";
             <table class="table table-bordered table-striped table-hover">
                 <tr>
                     <th>No</th>
-                    <th>NISN</th>
+                    <th>NIS</th>
                     <th>Nama</th>
                     <th>Kelas</th>
                     <th>Aksi</th>
@@ -37,7 +37,7 @@ include "koneksi.php";
                 
                 <?php
                 $no = 1;
-                $tampil = mysqli_query($kon,"SELECT * from tmhs ORDER BY id_siswa DESC");
+                $tampil = mysqli_query($koneksi,"SELECT * from tmhs ORDER BY id_siswa DESC");
                 while($data = mysqli_fetch_array($tampil)) :
                 
                 ?>
@@ -48,18 +48,78 @@ include "koneksi.php";
                     <td><?= $data['nama'] ?></td>
                     <td><?= $data['kelas'] ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning">Ubah</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
+                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $no ?>">Ubah</a>
+                        <a href="#" class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#modalHapus<?= $no ?>">Hapus</a>
                     </td>
                 </tr>
+
+            
+            <div class="modal fade" id="modalUbah<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Ubah Data Siswa</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="aksi_crud.php">
+                    <input type="hidden" name="id_siswa" value="<?= $data['id_siswa'] ?>">
+                        <div class="mb-3">
+                            <label for=exampleFormControlInput1 class="form-label">NIS</label>
+                            <input type="text" class="form-control" name="tnis" value="<?= $data['nis']?>"
+                        </div>
+                        <div class="mb-3">
+                            <label for=exampleFormControlInput1 class="form-label">Nama</label>
+                            <input type="text" class="form-control" name="tnama" value="<?= $data['nama']?>"placeholder="Masukkan Nama anda!">
+                        </div>
+                        <div class="mb-3">
+                            <label for=exampleFormControlInput1 class="form-label">Kelas</label>
+                            <input type="text" class="form-control" name="tkelas" value="<?= $data['kelas']?>"
+                        </div>
+
+            </div>    
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="bubah">Ubah</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+        <div class="modal fade" id="modalHapus<?= $no ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Hapus data</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="aksi_crud.php">
+                    <input type="hidden" name="id_siswa" value="<?= $data['id_siswa'] ?>">
+                    
+
+                            <h5 class="text-center"> Apakah anda yakin akan menghapus data ini? <br>
+                            <span class="text-danger"><?= $data['nis'] ?> - <?= $data['nama'] ?></span>
+                            </h5>
+                            
+                            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="bhapus">Ya,Hapus</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+            
+
                 <?php endwhile; 
                 
                 ?>
             </table>
             
             
-
-            <!-- Modal -->
+            
             <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -68,7 +128,7 @@ include "koneksi.php";
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="aksi_crud.php>
+                    <form method="POST" action="aksi_crud.php">
                     
                         <div class="mb-3">
                             <label for=exampleFormControlInput1 class="form-label">NIS</label>
@@ -88,10 +148,11 @@ include "koneksi.php";
                 <button type="submit" class="btn btn-primary" name="bsimpan">Simpan</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
             </div>
-      </form>
+        </form>
     </div>
   </div>
 </div>
+            
          </div>
     </div>
     </div>

@@ -1,13 +1,10 @@
 <?php
 
-$host="localhost";
+$server="localhost";
 $user="root";
 $password="";
 $db="dbcrud_modal";
 
-$kon = mysqli_connect($host,$user,$password,$db);
-if (!$kon){
-        die("Koneksi Gagal:".mysqli_connect_error());
+$koneksi = mysqli_connect($server , $user, $password, $db) or die(mysqli_error($koneksi));
 
-}
 ?>

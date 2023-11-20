@@ -47,12 +47,14 @@
     if (isset($_POST['bhapus']))  {
 
         $hapus = mysqli_query($koneksi,"DELETE FROM tmhs WHERE id_siswa = '$_POST[id_siswa]' ");  
-        if($hapus){
+       
+       
+        if($hapus) {
             echo "<script>
                     alert('Hapus data Sukses!');
                     document.location='index.php';
                    </script>";
-        }else{
+        }else {
             echo "<script>
                     alert('Hapus data Gagal!');
                     document.location='index.php';

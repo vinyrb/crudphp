@@ -1,6 +1,13 @@
 <?php
 
-include "koneksi.php";
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('location:login.php');
+    exit;
+}
+
+
+include 'koneksi.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -139,19 +146,21 @@ include "koneksi.php";
                             <input type="text" class="form-control" name="tkelas" placeholder="Masukkan Kelas Anda"       
                         </div>
 
-            </div>    
+            </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" name="bsimpan">Simpan</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
             </div>
         </form>
+         
     </div>
   </div>
 </div>
-            
+
          </div>
     </div>
-    </div>    
+    </div>
+    <a href="logout.php" class="btn btn-dark">Logout</a>                  
 
 
 

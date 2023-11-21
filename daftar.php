@@ -16,14 +16,14 @@
                 <div class="card-header text-center">
                       Register
                 </div>
-                <form action="login.php" method="post">
+                <form action="" method="post">
             <div class="card-body">
-                <label for="usename" class="form-label">Username</label>
+                <label for="username" class="form-label">Username</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
                     </svg></span>
-                    <input type="text" class="form-control" id="usename" name="username" require
+                    <input type="text" class="form-control" id="username" name="username" require
                     placeholder="Masukkan username"aria-describedby="basic-addon3">
                 </div>
                     <label for="password" class="form-label">Password</label>
@@ -35,8 +35,7 @@
                     placeholder="Masukkan password"aria-describedby="basic-addon3">
                 </div> 
                 <div class="row mb-3">
-                  <button type="submit" class="btn btn-primary" name="btnRegister">Register</button>
-                  
+                  <button type="submit" class="btn btn-primary" name="btnRegister">Register</button> 
                 </div>
                 </form>
                 
@@ -57,11 +56,18 @@
 include 'koneksi.php';
 if (isset($_POST['btnRegister'])) {
     $username=$_POST['username'];
-    $password=$_POST['password'];
+    $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    $query=mysqli_query($koneksi,"INSERT INTO user VALUES ('$username','$password')");
+    $query=mysqli_query($koneksi,"INSERT INTO user VALUES ('$username', '$password')");
 
-    if($query){
-        header('location:login.php');
+    if ($query) {
+      echo "
+      <script>
+        alert('Registrasi user Berhasil!');
+        window.location.href='login.php';
+      </script>
+      ";
     }
 }
+
+?>

@@ -83,13 +83,13 @@ include 'koneksi.php';
                                 <label for=exampleFormControlInput1 class="form-label">Kelas</label>
                                 <input type="text" class="form-control" name="tkelas" value="<?= $data['kelas']?>">
                             </div>
-                        </form>
                     </div>    
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="bubah">Ubah</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
                     </div>                        
                 </div>
+                </form>
             </div>
         </div>
 

@@ -5,10 +5,9 @@
 
     if (isset($_POST['bsimpan']))  {
 
-        $simpan = mysqli_query($koneksi,"INSERT INTO tmhs(nis, nama, kelas)
-                                VALUES  ('$_POST[tnis]',
-                                         '$_POST[tnama]',
-                                         '$_POST[tkelas]')");
+        $simpan = mysqli_query($koneksi,"INSERT INTO task(task, date)
+                                VALUES  ('$_POST[task]',
+                                         '$_POST[date]')");
         if($simpan){
             echo "<script>
                     alert('Simpan data Sukses!');
@@ -23,9 +22,8 @@
     }
 
     if (isset($_POST['bubah']))  {
-
-        $ubah = mysqli_query($koneksi,"UPDATE tmhs SET
-                                                        nis = '$_POST[tnis]',
+        $ubah = mysqli_query($koneksi,"UPDATE task SET
+                                                        status ='is]',
                                                         nama = '$_POST[tnama]',
                                                         kelas = '$_POST[tkelas]'
                                                     WHERE id_siswa = '$_POST[id_siswa]'   
@@ -46,7 +44,7 @@
 
     if (isset($_POST['bhapus']))  {
 
-        $hapus = mysqli_query($koneksi,"DELETE FROM tmhs WHERE id_siswa = '$_POST[id_siswa]' ");  
+        $hapus = mysqli_query($koneksi,"DELETE FROM task WHERE id = '$_POST[id]' ");  
        
        
         if($hapus) {
